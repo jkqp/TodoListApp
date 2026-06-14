@@ -1,0 +1,16 @@
+# Build output
+bin/
+obj/
+
+# User-specific VS/Rider files
+*.user
+*.suo
+.vs/
+.idea/
+
+# dotnet local tools
+.dotnet/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -60,24 +60,23 @@ Build a full-stack todo list application where users can manage a personal task 
 ## Implementation Steps
 
 ### Backend
-- [ ] Scaffold C# .NET 9 Web API project under `TodoListApp.Api/`
-- [ ] Define `TodoItem` model: `Id` (Guid), `Text` (string), `IsCompleted` (bool), `Order` (int)
-- [ ] Implement in-memory repository (thread-safe list or concurrent dictionary)
-- [ ] Implement API endpoints: GET `/todos`, POST `/todos`, PUT `/todos/{id}`, PATCH `/todos/reorder`, DELETE `/todos/{id}`
-- [ ] Configure CORS to allow requests from the frontend origin (e.g., `file://` or `localhost:*`)
-- [ ] Confirm endpoints work via Swagger UI
-- [ ] Write xUnit tests: add, reject-empty-add, edit, reject-empty-edit, toggle-complete, uncheck, delete, reorder
+- [x] Scaffold C# .NET 10 Web API project under `TodoListApp.Api/`
+- [x] Define `TodoItem` model: `Id` (Guid), `Text` (string), `IsCompleted` (bool), `Order` (int)
+- [x] Implement in-memory repository (lock-based, thread-safe)
+- [x] Implement API endpoints: GET `/todos`, POST `/todos`, PUT `/todos/{id}`, PATCH `/todos/reorder`, DELETE `/todos/{id}`
+- [x] Configure API to serve `TodoListApp.Client/` as static files (same-origin, no CORS needed)
+- [x] Write xUnit tests (11/11 passing): add, reject-empty-add, reject-whitespace-add, edit, reject-empty-edit, toggle-complete, uncheck, delete, delete-then-update, reorder
 
 ### Frontend
-- [ ] Create `TodoListApp.Client/` folder with `index.html`, `style.css`, `app.js`
-- [ ] Implement shared `validateText(value)` function in `app.js` (returns error string or null)
-- [ ] Implement `renderList()` — fetches GET `/todos` and builds the DOM list
-- [ ] Implement add item: input + button, calls POST, re-renders list, validates before submit
-- [ ] Implement checkbox toggle: calls PUT with flipped `IsCompleted`, re-renders
-- [ ] Implement completed styling: grey text + strikethrough via CSS class
-- [ ] Implement inline edit: replaces text span with input on edit click, calls PUT on save, validates
-- [ ] Implement delete: calls DELETE, removes item from DOM
-- [ ] Implement HTML5 drag-and-drop reordering: `draggable="true"`, `dragstart`/`dragover`/`drop` events, calls PATCH `/todos/reorder` on drop
+- [x] Create `TodoListApp.Client/` folder with `index.html`, `style.css`, `app.js`
+- [x] Implement shared `validateText(value)` + `applyValidation()` functions
+- [x] Implement `renderList()` — fetches GET `/todos` and builds the DOM list
+- [x] Implement add item: input + button, calls POST, re-renders list, validates before submit
+- [x] Implement checkbox toggle: calls PUT with flipped `IsCompleted`, updates styling without full re-render
+- [x] Implement completed styling: grey text + strikethrough via CSS class
+- [x] Implement inline edit: replaces text span with input on edit click, calls PUT on save, validates; Escape/Enter shortcuts
+- [x] Implement delete: calls DELETE, removes item from DOM
+- [x] Implement HTML5 drag-and-drop reordering: `draggable="true"`, `dragstart`/`dragover`/`drop` events, optimistic DOM reorder, calls PATCH `/todos/reorder` on drop
 - [ ] Smoke test full happy path in the browser
 
 ## Risks / Watch-outs
