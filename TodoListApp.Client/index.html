@@ -17,9 +17,16 @@
         placeholder="Add a new task…"
         autocomplete="off"
       />
+      <select id="add-category">
+        <option value="Category">Category</option>
+        <option value="Cleaning">Cleaning</option>
+        <option value="Work">Work</option>
+        <option value="Life">Life</option>
+      </select>
       <button type="submit">Add</button>
     </form>
     <p class="error-msg" id="add-error"></p>
+    <p class="error-msg" id="add-category-error"></p>
 
     <ul class="todo-list" id="todo-list">
       <li class="empty-state">Loading…</li>

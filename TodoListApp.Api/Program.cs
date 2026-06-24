@@ -31,8 +31,10 @@ app.MapPost("/todos", (TodoRepository repo, CreateTodoRequest req) =>
 {
     if (string.IsNullOrWhiteSpace(req.Text))
         return Results.BadRequest("Field must have content to submit");
+    if (req.Category == "Category")
+        return Results.BadRequest("must have a category");
 
-    var item = repo.Add(req.Text.Trim());
+    var item = repo.Add(req.Text.Trim(), req.Category ?? "Category");
     return Results.Created($"/todos/{item.Id}", item);
 });
 
@@ -40,8 +42,10 @@ app.MapPut("/todos/{id:guid}", (TodoRepository repo, Guid id, UpdateTodoRequest 
 {
     if (string.IsNullOrWhiteSpace(req.Text))
         return Results.BadRequest("Field must have content to submit");
+    if (req.Category == "Category")
+        return Results.BadRequest("must have a category");
 
-    var item = repo.Update(id, req.Text.Trim(), req.IsCompleted);
+    var item = repo.Update(id, req.Text.Trim(), req.IsCompleted, req.Category ?? "Category");
     return item is null ? Results.NotFound() : Results.Ok(item);
 });
 
@@ -58,6 +62,6 @@ app.Run();
 
 public partial class Program { }
 
-record CreateTodoRequest(string Text);
-record UpdateTodoRequest(string Text, bool IsCompleted);
+record CreateTodoRequest(string Text, string? Category);
+record UpdateTodoRequest(string Text, bool IsCompleted, string? Category);
 record ReorderRequest(List<Guid> OrderedIds);
