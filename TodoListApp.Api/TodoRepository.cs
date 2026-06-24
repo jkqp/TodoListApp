@@ -11,7 +11,7 @@ public class TodoRepository
             return _items.OrderBy(x => x.Order).ToList();
     }
 
-    public TodoItem Add(string text)
+    public TodoItem Add(string text, string category)
     {
         lock (_lock)
         {
@@ -20,14 +20,15 @@ public class TodoRepository
                 Id = Guid.NewGuid(),
                 Text = text,
                 IsCompleted = false,
-                Order = _items.Count > 0 ? _items.Max(x => x.Order) + 1 : 0
+                Order = _items.Count > 0 ? _items.Max(x => x.Order) + 1 : 0,
+                Category = category
             };
             _items.Add(item);
             return item;
         }
     }
 
-    public TodoItem? Update(Guid id, string text, bool isCompleted)
+    public TodoItem? Update(Guid id, string text, bool isCompleted, string category)
     {
         lock (_lock)
         {
@@ -35,6 +36,7 @@ public class TodoRepository
             if (item is null) return null;
             item.Text = text;
             item.IsCompleted = isCompleted;
+            item.Category = category;
             return item;
         }
     }

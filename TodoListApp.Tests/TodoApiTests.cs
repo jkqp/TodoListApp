@@ -68,6 +68,24 @@ public class TodoApiTests(WebApplicationFactory<Program> factory)
     }
 
     [Fact]
+    public async Task AddItem_WithDefaultCategory_ReturnsBadRequest()
+    {
+        var response = await _client.PostAsJsonAsync("/todos", new { Text = "Buy milk", Category = "Category" });
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task EditItem_WithDefaultCategory_ReturnsBadRequest()
+    {
+        var created = await CreateItem("Original");
+
+        var updateResponse = await _client.PutAsJsonAsync($"/todos/{created.Id}",
+            new { Text = "Updated", IsCompleted = false, Category = "Category" });
+
+        Assert.Equal(HttpStatusCode.BadRequest, updateResponse.StatusCode);
+    }
+
+    [Fact]
     public async Task ToggleComplete_ChecksItem()
     {
         var created = await CreateItem("Task");

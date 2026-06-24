@@ -204,3 +204,53 @@ h1 {
   padding: 40px 0;
   font-size: 1rem;
 }
+
+/* Category — add form dropdown */
+#add-category {
+  padding: 10px 10px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #1a1a2e;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#add-category:focus {
+  border-color: #6366f1;
+}
+
+#add-category.error {
+  border-color: #ef4444;
+}
+
+/* Category — read-only badge on each item */
+.category-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  background: #eef2ff;
+  color: #6366f1;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Category — editable dropdown in edit mode */
+.category-select {
+  padding: 4px 8px;
+  border: 2px solid #6366f1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: #fff;
+  color: #1a1a2e;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.category-select.error {
+  border-color: #ef4444;
+}
